@@ -56,7 +56,10 @@ const ApproachSection = () => {
               ))}
             </div>
             
-            <Button className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white">
+            <Button 
+              className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white"
+              onClick={() => window.open('https://wa.me/34621425745', '_blank')}
+            >
               <span>Start Your Journey</span>
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
