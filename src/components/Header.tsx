@@ -24,7 +24,7 @@ const Header = () => {
       )}
     >
       <div className="container flex justify-between items-center">
-        <Logo />
+        <Logo size={scrolled ? "md" : "lg"} />
         
         <nav className="hidden md:flex items-center space-x-8">
           <a href="#services" className="text-white hover:text-trailblazery-pink transition-colors">Services</a>

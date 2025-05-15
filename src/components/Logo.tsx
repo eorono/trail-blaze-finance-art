@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 interface LogoProps {
   className?: string;
   showText?: boolean;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
 const Logo = ({ className, showText = true, size = "md" }: LogoProps) => {
@@ -12,10 +12,11 @@ const Logo = ({ className, showText = true, size = "md" }: LogoProps) => {
     sm: { logo: "h-8 w-8", text: "text-lg" },
     md: { logo: "h-10 w-10", text: "text-xl" },
     lg: { logo: "h-12 w-12", text: "text-2xl" },
+    xl: { logo: "h-16 w-16", text: "text-3xl" },
   };
 
   return (
-    <div className={cn("flex items-center gap-2", className)}>
+    <div className={cn("flex items-center gap-3", className)}>
       <div className={cn("relative", sizes[size].logo)}>
         {/* Geometric T logo with gradient */}
         <svg
@@ -23,6 +24,7 @@ const Logo = ({ className, showText = true, size = "md" }: LogoProps) => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="h-full w-full"
+          preserveAspectRatio="xMidYMid meet"
         >
           <path
             d="M277 0H500V248H388V500H277V248V0Z"
