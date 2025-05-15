@@ -17,7 +17,10 @@ const HeroSection = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white px-8 py-6 text-lg">
+              <Button 
+                className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white px-8 py-6 text-lg"
+                onClick={() => window.open('https://wa.me/34621425745', '_blank')}
+              >
                 Schedule Consultation
               </Button>
             </div>

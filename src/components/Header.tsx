@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
@@ -32,7 +33,10 @@ const Header = () => {
           <a href="#contact" className="text-white hover:text-trailblazery-pink transition-colors">Contact</a>
         </nav>
         
-        <Button className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white">
+        <Button 
+          className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white"
+          onClick={() => window.open('https://wa.me/34621425745', '_blank')}
+        >
           Get Started
         </Button>
       </div>

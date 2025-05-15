@@ -55,6 +55,7 @@ const ContactSection = () => {
                 </div>
                 <Button 
                   className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white"
+                  onClick={() => window.open('https://wa.me/34621425745', '_blank')}
                 >
                   Schedule Consultation
                 </Button>
