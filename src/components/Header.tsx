@@ -27,7 +27,7 @@ const Header = () => {
           <div className="h-10 w-10 bg-trailblazery-blue rounded-sm flex items-center justify-center">
             <span className="font-bold text-white text-2xl">T</span>
           </div>
-          <span className="font-bold text-xl text-white">FinTrail</span>
+          <span className="font-bold text-xl text-white">Trailblazery</span>
         </div>
         
         <nav className="hidden md:flex items-center space-x-8">
