@@ -1,5 +1,5 @@
-
 import { cn } from "@/lib/utils";
+import Logo from "./Logo";
 
 const Footer = () => {
   return (
@@ -10,11 +10,8 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
           <div>
-            <div className="flex items-center gap-2 mb-6">
-              <div className="h-10 w-10 bg-trailblazery-blue rounded-sm flex items-center justify-center">
-                <span className="font-bold text-white text-2xl">T</span>
-              </div>
-              <span className="font-bold text-xl text-white">Trailblazery</span>
+            <div className="mb-6">
+              <Logo />
             </div>
             <p className="text-gray-400 mb-6">
               Global financial strategies tailored to optimize your position and secure your future prosperity.

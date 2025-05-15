@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
+import Logo from "./Logo";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -23,12 +24,7 @@ const Header = () => {
       )}
     >
       <div className="container flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="h-10 w-10 bg-trailblazery-blue rounded-sm flex items-center justify-center">
-            <span className="font-bold text-white text-2xl">T</span>
-          </div>
-          <span className="font-bold text-xl text-white">Trailblazery</span>
-        </div>
+        <Logo />
         
         <nav className="hidden md:flex items-center space-x-8">
           <a href="#services" className="text-white hover:text-trailblazery-pink transition-colors">Services</a>
