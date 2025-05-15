@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import { CheckCircle, Mail, MapPin, Phone } from "lucide-react";
+import { CheckCircle, MapPin, Phone } from "lucide-react";
 
 const ContactSection = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -33,16 +33,6 @@ const ContactSection = () => {
               <h3 className="text-xl font-bold mb-6 text-white">Contact Information</h3>
               
               <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="h-10 w-10 rounded-full bg-trailblazery-blue/20 flex items-center justify-center mr-4">
-                    <Mail className="h-5 w-5 text-trailblazery-magenta" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-400 mb-1">Email</p>
-                    <p className="text-white">contact@fintrail.com</p>
-                  </div>
-                </div>
-                
                 <div className="flex items-start">
                   <div className="h-10 w-10 rounded-full bg-trailblazery-blue/20 flex items-center justify-center mr-4">
                     <Phone className="h-5 w-5 text-trailblazery-magenta" />
@@ -106,11 +96,11 @@ const ContactSection = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm text-gray-400 mb-2">Email Address</label>
+                    <label className="block text-sm text-gray-400 mb-2">Phone Number</label>
                     <Input 
-                      type="email"
+                      type="tel"
                       className="bg-trailblazery-dark/40 border-trailblazery-blue/20 text-white focus-visible:ring-trailblazery-magenta" 
-                      placeholder="your@email.com"
+                      placeholder="Your phone number"
                       required
                     />
                   </div>

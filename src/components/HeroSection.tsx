@@ -1,6 +1,5 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -20,10 +19,6 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white px-8 py-6 text-lg">
                 Schedule Consultation
-              </Button>
-              <Button variant="outline" className="border-trailblazery-blue text-white hover:bg-trailblazery-blue/10 px-8 py-6 text-lg">
-                <span>Learn More</span> 
-                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
           </div>
