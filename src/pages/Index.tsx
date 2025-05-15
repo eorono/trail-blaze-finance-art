@@ -1,12 +1,26 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
+import ServicesSection from "@/components/ServicesSection";
+import GlobalReachSection from "@/components/GlobalReachSection";
+import ApproachSection from "@/components/ApproachSection";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
+import { GeometricBackground } from "@/components/GeometricElements";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <GeometricBackground />
+      <Header />
+      <main>
+        <HeroSection />
+        <ServicesSection />
+        <GlobalReachSection />
+        <ApproachSection />
+        <ContactSection />
+      </main>
+      <Footer />
     </div>
   );
 };
