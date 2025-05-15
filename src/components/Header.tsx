@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
@@ -24,7 +23,7 @@ const Header = () => {
       )}
     >
       <div className="container flex justify-between items-center">
-        <Logo size={scrolled ? "md" : "lg"} />
+        <Logo size={scrolled ? "md" : "xl"} />
         
         <nav className="hidden md:flex items-center space-x-8">
           <a href="#services" className="text-white hover:text-trailblazery-pink transition-colors">Services</a>
