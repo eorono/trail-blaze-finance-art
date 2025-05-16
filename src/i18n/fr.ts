@@ -92,7 +92,8 @@ export const fr = {
     officesList: "New York • Dubaï • Limassol • La Valette • Andorre",
     peaceTitle: "Tranquillité Financière",
     peaceText: "Notre équipe d'experts est prête à vous aider à naviguer dans le monde complexe de la finance internationale.",
-    cta: "Planifier une Consultation"
+    cta: "Planifier une Consultation",
+    leaveData: "Laissez vos coordonnées"
   },
   footer: {
     description: "Stratégies financières mondiales conçues pour optimiser votre position et assurer votre prospérité future.",

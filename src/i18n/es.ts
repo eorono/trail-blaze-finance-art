@@ -92,7 +92,8 @@ export const es = {
     officesList: "Nueva York • Dubái • Limassol • Valletta • Andorra",
     peaceTitle: "Tranquilidad Financiera",
     peaceText: "Nuestro equipo de expertos está listo para ayudarlo a navegar por el complejo mundo de las finanzas internacionales.",
-    cta: "Programar Consulta"
+    cta: "Programar Consulta",
+    leaveData: "Deja tus datos"
   },
   footer: {
     description: "Estrategias financieras globales diseñadas para optimizar su posición y asegurar su futura prosperidad.",

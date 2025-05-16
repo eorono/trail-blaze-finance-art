@@ -92,7 +92,8 @@ export const en = {
     officesList: "New York • Dubai • Limassol • Valletta • Andorra",
     peaceTitle: "Financial Peace of Mind",
     peaceText: "Our team of experts is ready to help you navigate the complex world of international finance.",
-    cta: "Schedule Consultation"
+    cta: "Schedule Consultation",
+    leaveData: "Leave your details"
   },
   footer: {
     description: "Global financial strategies tailored to optimize your position and secure your future prosperity.",

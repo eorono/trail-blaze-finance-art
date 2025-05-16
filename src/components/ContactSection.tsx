@@ -2,6 +2,11 @@
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const ContactSection = () => {
   const { t } = useLanguage();
@@ -60,6 +65,26 @@ const ContactSection = () => {
                   {t.contact.cta}
                 </Button>
               </div>
+            </div>
+            
+            <div className="mt-8 pt-8 border-t border-trailblazery-blue/20 text-center">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button 
+                    className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white w-full md:w-auto"
+                  >
+                    {t.contact.leaveData}
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="w-full max-w-4xl p-0 border-trailblazery-blue/30 bg-trailblazery-dark/90">
+                  <iframe 
+                    src="https://api.leadconnectorhq.com/widget/form/w9FxJLqrjzzQEG2jtFKW" 
+                    className="w-full h-[600px] border-0" 
+                    title="Contact Form"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  />
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
