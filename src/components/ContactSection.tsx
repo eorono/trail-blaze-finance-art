@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone } from "lucide-react";
+import { MapPin, Phone, CheckCircle } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import {
   Dialog,
@@ -12,11 +12,23 @@ import {
 } from "@/components/ui/dialog";
 import { useEffect, useState, useRef } from "react";
 import { toast } from "@/hooks/use-toast";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 const ContactSection = () => {
   const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  // Reset success message when dialog closes
+  useEffect(() => {
+    if (!isOpen) {
+      // Wait a bit before resetting to allow for transition animations
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 300);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     // Listen for events from the iframe
@@ -28,19 +40,31 @@ const ContactSection = () => {
         try {
           const data = JSON.parse(event.data);
           if (data.type === 'form-submit-success' || data.event === 'form-submit-success') {
+            // Show success message
+            setShowSuccess(true);
+            
             toast({
               title: t.contact.formSuccess,
               description: t.contact.formSuccessMessage,
               duration: 5000,
             });
-            // Close the dialog after successful submission
-            setIsOpen(false);
+            
+            // Close the dialog after a short delay to show the success message
+            setTimeout(() => {
+              setIsOpen(false);
+            }, 2000);
           }
           // Also handle button clicks or page changes in iframe
           if (data.type === 'button-click' || data.event === 'button-click' || 
               data.type === 'page-change' || data.event === 'page-change' || 
               data.type === 'form-submitted' || data.event === 'form-submitted') {
-            setIsOpen(false);
+            // Show success message
+            setShowSuccess(true);
+            
+            // Close the dialog after a short delay
+            setTimeout(() => {
+              setIsOpen(false);
+            }, 2000);
           }
         } catch (e) {
           // Try to handle non-JSON messages
@@ -49,14 +73,22 @@ const ContactSection = () => {
               event.data.includes('button') || 
               event.data.includes('click') || 
               event.data.includes('complete') || 
-              event.data.includes('change')) {
+              event.data.includes('change') ||
+              event.data.includes('thank you')) {
+            
+            // Show success message
+            setShowSuccess(true);
+            
             toast({
               title: t.contact.formSuccess,
               description: t.contact.formSuccessMessage,
               duration: 5000,
             });
-            // Close the dialog after receiving these messages
-            setIsOpen(false);
+            
+            // Close the dialog after a short delay
+            setTimeout(() => {
+              setIsOpen(false);
+            }, 2000);
           }
           console.log("Non-JSON message received:", event.data);
         }
@@ -85,7 +117,7 @@ const ContactSection = () => {
             // Post a message to the iframe to set up communication
             iframeRef.current?.contentWindow?.postMessage('setup-close-listener', '*');
             
-            // Try to inject a script into the iframe to listen for button clicks
+            // Try to inject a script into the iframe to listen for button clicks and form submissions
             const iframeDocument = iframeRef.current?.contentDocument || 
                                  (iframeRef.current?.contentWindow?.document);
             
@@ -112,6 +144,34 @@ const ContactSection = () => {
                   originalPushState.apply(this, arguments);
                   window.parent.postMessage(JSON.stringify({type: 'page-change'}), '*');
                 };
+
+                // Look for thank you message or success message in the page content
+                function checkForSuccessMessage() {
+                  const pageText = document.body.innerText.toLowerCase();
+                  if (pageText.includes('thank you') || 
+                      pageText.includes('gracias') || 
+                      pageText.includes('success') || 
+                      pageText.includes('éxito') || 
+                      pageText.includes('submitted') || 
+                      pageText.includes('enviado')) {
+                    window.parent.postMessage(JSON.stringify({type: 'form-submit-success'}), '*');
+                  }
+                }
+                
+                // Check on load and periodically
+                checkForSuccessMessage();
+                setInterval(checkForSuccessMessage, 1000);
+                
+                // Observe DOM changes to detect success message faster
+                const observer = new MutationObserver(function(mutations) {
+                  checkForSuccessMessage();
+                });
+                
+                observer.observe(document.body, {
+                  childList: true,
+                  subtree: true,
+                  characterData: true
+                });
               `;
               
               try {
@@ -202,14 +262,29 @@ const ContactSection = () => {
                       {t.contact.formDescription}
                     </DialogDescription>
                   </DialogHeader>
-                  <iframe 
-                    ref={iframeRef}
-                    src="https://api.leadconnectorhq.com/widget/form/w9FxJLqrjzzQEG2jtFKW" 
-                    className="w-full h-[600px] border-0" 
-                    title="Contact Form"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    onLoad={handleIframeLoad}
-                  />
+                  
+                  {showSuccess ? (
+                    <div className="p-8 text-center">
+                      <Alert className="bg-trailblazery-blue/10 border-trailblazery-blue/20 text-white mb-4">
+                        <CheckCircle className="h-5 w-5 text-trailblazery-magenta" />
+                        <AlertTitle className="text-lg font-bold text-white mb-2">
+                          Thank you for taking the time to complete this form.
+                        </AlertTitle>
+                        <AlertDescription className="text-gray-300">
+                          We've received your information and will be in touch with you shortly.
+                        </AlertDescription>
+                      </Alert>
+                    </div>
+                  ) : (
+                    <iframe 
+                      ref={iframeRef}
+                      src="https://api.leadconnectorhq.com/widget/form/w9FxJLqrjzzQEG2jtFKW" 
+                      className="w-full h-[600px] border-0" 
+                      title="Contact Form"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      onLoad={handleIframeLoad}
+                    />
+                  )}
                 </DialogContent>
               </Dialog>
             </div>
