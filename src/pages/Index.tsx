@@ -7,8 +7,12 @@ import ApproachSection from "@/components/ApproachSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import { GeometricBackground } from "@/components/GeometricElements";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Index = () => {
+  // Inicializa el hook para las animaciones de scroll
+  useScrollAnimation();
+  
   return (
     <div className="min-h-screen">
       <GeometricBackground />

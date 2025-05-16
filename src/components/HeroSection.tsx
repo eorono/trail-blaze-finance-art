@@ -1,15 +1,24 @@
-
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const HeroSection = () => {
   const { t } = useLanguage();
+  
+  const scrollToSection = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 80,
+        behavior: "smooth"
+      });
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center">
       <div className="container mx-auto px-4 py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
+          <div className="animate-on-scroll fade-in-left">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               <span className="text-white">{t.hero.title}</span>
               <span className="block text-gradient">{t.hero.subtitle}</span>
@@ -26,10 +35,18 @@ const HeroSection = () => {
               >
                 {t.hero.cta}
               </Button>
+              
+              <Button
+                variant="outline"
+                className="border-trailblazery-blue/30 hover:bg-trailblazery-blue/10 text-white px-8 py-6 text-lg"
+                onClick={() => scrollToSection('contact')}
+              >
+                {t.nav.contact}
+              </Button>
             </div>
           </div>
           
-          <div className="relative">
+          <div className="relative animate-on-scroll fade-in-right">
             <div className="relative z-10 aspect-square max-w-md mx-auto">
               <div className="absolute inset-0 bg-gradient-to-br from-trailblazery-blue/30 to-trailblazery-magenta/30 rounded-full blur-3xl animate-pulse-slow" />
               <div className="h-full w-full rounded-full border-4 border-trailblazery-magenta/30 backdrop-blur-sm flex items-center justify-center overflow-hidden">

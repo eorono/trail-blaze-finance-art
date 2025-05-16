@@ -74,7 +74,7 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-24 relative">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-on-scroll fade-in-up">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             <span className="text-white">{t.contact.title}</span>
             <span className="text-gradient ml-2">{t.contact.subtitle}</span>
@@ -85,11 +85,11 @@ const ContactSection = () => {
         </div>
         
         <div className="max-w-3xl mx-auto">
-          <div className="rounded-lg border border-trailblazery-blue/20 bg-trailblazery-dark/60 backdrop-blur-sm p-6">
+          <div className="rounded-lg border border-trailblazery-blue/20 bg-trailblazery-dark/60 backdrop-blur-sm p-6 animate-on-scroll">
             <h3 className="text-xl font-bold mb-6 text-white">{t.contact.info}</h3>
             
             <div className="space-y-6">
-              <div className="flex items-start">
+              <div className="flex items-start animate-on-scroll delay-100">
                 <div className="h-10 w-10 rounded-full bg-trailblazery-blue/20 flex items-center justify-center mr-4">
                   <Phone className="h-5 w-5 text-trailblazery-magenta" />
                 </div>
@@ -99,7 +99,7 @@ const ContactSection = () => {
                 </div>
               </div>
               
-              <div className="flex items-start">
+              <div className="flex items-start animate-on-scroll delay-200">
                 <div className="h-10 w-10 rounded-full bg-trailblazery-blue/20 flex items-center justify-center mr-4">
                   <MapPin className="h-5 w-5 text-trailblazery-magenta" />
                 </div>
@@ -110,7 +110,7 @@ const ContactSection = () => {
               </div>
             </div>
             
-            <div className="mt-8 pt-8 border-t border-trailblazery-blue/20">
+            <div className="mt-8 pt-8 border-t border-trailblazery-blue/20 animate-on-scroll delay-300">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                   <h3 className="text-xl font-bold text-white">{t.contact.peaceTitle}</h3>
@@ -127,7 +127,7 @@ const ContactSection = () => {
               </div>
             </div>
             
-            <div className="mt-8 pt-8 border-t border-trailblazery-blue/20 text-center">
+            <div className="mt-8 pt-8 border-t border-trailblazery-blue/20 text-center animate-on-scroll delay-400">
               <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogTrigger asChild>
                   <Button 

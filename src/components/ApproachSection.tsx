@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -10,7 +9,7 @@ const ApproachSection = () => {
     <section id="approach" className="py-24 relative">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
+          <div className="animate-on-scroll fade-in-left">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
               <span className="text-white">{t.approach.title}</span>
               <span className="text-gradient ml-2">{t.approach.subtitle}</span>
@@ -22,7 +21,7 @@ const ApproachSection = () => {
             
             <div className="mb-12">
               {t.approach.steps.map((step, index) => (
-                <div key={index} className="flex mb-8 last:mb-0">
+                <div key={index} className={`flex mb-8 last:mb-0 animate-on-scroll delay-${index * 100}`}>
                   <div className="mr-6">
                     <div className="h-12 w-12 rounded-sm bg-gradient-to-br from-trailblazery-blue to-trailblazery-magenta flex items-center justify-center font-mono text-white">
                       {step.number}
@@ -45,7 +44,7 @@ const ApproachSection = () => {
             </Button>
           </div>
           
-          <div className="relative">
+          <div className="relative animate-on-scroll fade-in-right">
             <div className="relative z-10 backdrop-blur rounded-lg overflow-hidden border border-trailblazery-blue/20">
               <div className="aspect-[4/5] relative overflow-hidden bg-trailblazery-dark/60">
                 <div className="absolute inset-0 flex items-center justify-center">

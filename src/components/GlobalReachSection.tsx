@@ -10,38 +10,43 @@ const GlobalReachSection = () => {
       country: "United States",
       code: "USA",
       benefits: ["Stable investment environment", "World-class banking infrastructure", "Diverse market opportunities"],
-      color: "from-blue-600 to-blue-800"
+      color: "from-blue-600 to-blue-800",
+      delay: "delay-100"
     },
     {
       country: "Dubai",
       code: "UAE",
       benefits: ["Tax-free income", "Strategic location", "Business-friendly regulations"],
-      color: "from-amber-500 to-red-600"
+      color: "from-amber-500 to-red-600",
+      delay: "delay-200"
     },
     {
       country: "Cyprus",
       code: "CY",
       benefits: ["EU membership benefits", "Attractive tax incentives", "Investment opportunities"],
-      color: "from-blue-500 to-cyan-600"
+      color: "from-blue-500 to-cyan-600",
+      delay: "delay-300"
     },
     {
       country: "Malta",
       code: "MT",
       benefits: ["EU financial passporting", "Double tax treaties", "Attractive corporate structures"],
-      color: "from-red-600 to-red-800"
+      color: "from-red-600 to-red-800",
+      delay: "delay-100"
     },
     {
       country: "Andorra",
       code: "AND",
       benefits: ["Low tax jurisdiction", "Personal privacy", "Political stability"],
-      color: "from-blue-600 to-amber-600"
+      color: "from-blue-600 to-amber-600",
+      delay: "delay-200"
     }
   ];
 
   return (
     <section id="global" className="py-24 relative">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-on-scroll fade-in-up">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             <span className="text-white">{t.global.title}</span>
             <span className="text-gradient ml-2">{t.global.subtitle}</span>
@@ -54,7 +59,10 @@ const GlobalReachSection = () => {
         <div className="relative">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {locations.map((location, index) => (
-              <Card key={index} className="overflow-hidden border border-trailblazery-blue/20 bg-trailblazery-dark/60 backdrop-blur-sm">
+              <Card 
+                key={index}
+                className={`overflow-hidden border border-trailblazery-blue/20 bg-trailblazery-dark/60 backdrop-blur-sm animate-on-scroll ${location.delay}`}
+              >
                 <div className={`h-2 w-full bg-gradient-to-r ${location.color}`} />
                 <div className="p-6">
                   <div className="flex justify-between items-center mb-4">
@@ -95,7 +103,7 @@ const GlobalReachSection = () => {
           </div>
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center animate-on-scroll fade-in-up delay-300">
           <h3 className="text-2xl font-semibold mb-4 text-white">{t.global.connected}</h3>
           <p className="text-gray-300 max-w-3xl mx-auto">
             {t.global.connectedText}

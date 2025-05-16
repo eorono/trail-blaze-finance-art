@@ -19,6 +19,17 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Implementar scroll suave para los enlaces de navegación
+  const scrollToSection = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 80, // Offset para la barra de navegación
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <header 
       className={cn(
@@ -30,18 +41,30 @@ const Header = () => {
         <Logo size={scrolled ? "md" : "xl"} />
         
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#services" className="text-white hover:text-trailblazery-pink transition-colors">
+          <button 
+            onClick={() => scrollToSection('services')} 
+            className="text-white hover:text-trailblazery-pink transition-colors"
+          >
             {t.nav.services}
-          </a>
-          <a href="#global" className="text-white hover:text-trailblazery-pink transition-colors">
+          </button>
+          <button 
+            onClick={() => scrollToSection('global')} 
+            className="text-white hover:text-trailblazery-pink transition-colors"
+          >
             {t.nav.globalReach}
-          </a>
-          <a href="#approach" className="text-white hover:text-trailblazery-pink transition-colors">
+          </button>
+          <button 
+            onClick={() => scrollToSection('approach')} 
+            className="text-white hover:text-trailblazery-pink transition-colors"
+          >
             {t.nav.approach}
-          </a>
-          <a href="#contact" className="text-white hover:text-trailblazery-pink transition-colors">
+          </button>
+          <button 
+            onClick={() => scrollToSection('contact')} 
+            className="text-white hover:text-trailblazery-pink transition-colors"
+          >
             {t.nav.contact}
-          </a>
+          </button>
         </nav>
         
         <div className="flex items-center gap-4">
