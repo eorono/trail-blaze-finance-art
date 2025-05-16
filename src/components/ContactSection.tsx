@@ -36,15 +36,26 @@ const ContactSection = () => {
             // Close the dialog after successful submission
             setIsOpen(false);
           }
+          // Also handle button clicks or page changes in iframe
+          if (data.type === 'button-click' || data.event === 'button-click' || 
+              data.type === 'page-change' || data.event === 'page-change' || 
+              data.type === 'form-submitted' || data.event === 'form-submitted') {
+            setIsOpen(false);
+          }
         } catch (e) {
           // Try to handle non-JSON messages
-          if (event.data.includes('success') || event.data.includes('submitted')) {
+          if (event.data.includes('success') || 
+              event.data.includes('submitted') || 
+              event.data.includes('button') || 
+              event.data.includes('click') || 
+              event.data.includes('complete') || 
+              event.data.includes('change')) {
             toast({
               title: t.contact.formSuccess,
               description: t.contact.formSuccessMessage,
               duration: 5000,
             });
-            // Close the dialog after successful submission
+            // Close the dialog after receiving these messages
             setIsOpen(false);
           }
           console.log("Non-JSON message received:", event.data);
@@ -62,11 +73,57 @@ const ContactSection = () => {
   const handleIframeLoad = () => {
     console.log("Form iframe loaded");
     
-    // Try to add a message listener to the iframe content if same origin
+    // Try to access iframe content
     try {
       const iframeContent = iframeRef.current?.contentWindow;
       if (iframeContent) {
         console.log("Attempting to access iframe content");
+        
+        // Try to add event listeners to buttons in the iframe
+        setTimeout(() => {
+          try {
+            // Post a message to the iframe to set up communication
+            iframeRef.current?.contentWindow?.postMessage('setup-close-listener', '*');
+            
+            // Try to inject a script into the iframe to listen for button clicks
+            const iframeDocument = iframeRef.current?.contentDocument || 
+                                 (iframeRef.current?.contentWindow?.document);
+            
+            if (iframeDocument) {
+              const script = iframeDocument.createElement('script');
+              script.textContent = `
+                document.addEventListener('click', function(e) {
+                  if (e.target.tagName === 'BUTTON' || 
+                      e.target.closest('button') ||
+                      e.target.type === 'submit' ||
+                      e.target.tagName === 'INPUT' && e.target.type === 'submit') {
+                    window.parent.postMessage(JSON.stringify({type: 'button-click'}), '*');
+                  }
+                });
+                
+                // Listen for form submissions
+                document.addEventListener('submit', function(e) {
+                  window.parent.postMessage(JSON.stringify({type: 'form-submitted'}), '*');
+                });
+                
+                // Listen for page changes through history API
+                const originalPushState = history.pushState;
+                history.pushState = function() {
+                  originalPushState.apply(this, arguments);
+                  window.parent.postMessage(JSON.stringify({type: 'page-change'}), '*');
+                };
+              `;
+              
+              try {
+                iframeDocument.body.appendChild(script);
+              } catch (error) {
+                console.log("Could not append script to iframe body", error);
+              }
+            }
+          } catch (error) {
+            console.log("Error setting up iframe communication", error);
+          }
+        }, 1000); // Wait for iframe to fully load
       }
     } catch (error) {
       console.log("Cannot access iframe content due to same-origin policy", error);
