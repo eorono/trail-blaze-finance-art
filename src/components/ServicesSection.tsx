@@ -9,6 +9,7 @@ import {
   Building, 
   CreditCard 
 } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface ServiceCardProps {
   title: string;
@@ -30,35 +31,37 @@ const ServiceCard = ({ title, description, icon, className }: ServiceCardProps) 
 );
 
 const ServicesSection = () => {
+  const { t } = useLanguage();
+  
   const services = [
     {
-      title: "International Tax Optimization",
-      description: "Strategic tax planning across multiple jurisdictions to minimize liabilities and maximize advantages.",
+      title: t.services.international.title,
+      description: t.services.international.description,
       icon: <Globe className="h-8 w-8" />,
     },
     {
-      title: "Asset Protection",
-      description: "Comprehensive solutions to safeguard your wealth and ensure long-term security.",
+      title: t.services.asset.title,
+      description: t.services.asset.description,
       icon: <ShieldCheck className="h-8 w-8" />,
     },
     {
-      title: "Investment Strategy",
-      description: "Expert guidance on global investment opportunities aligned with your financial goals.",
+      title: t.services.investment.title,
+      description: t.services.investment.description,
       icon: <TrendingUp className="h-8 w-8" />,
     },
     {
-      title: "Compliance Management",
-      description: "Navigate complex international regulations with precision and confidence.",
+      title: t.services.compliance.title,
+      description: t.services.compliance.description,
       icon: <FileText className="h-8 w-8" />,
     },
     {
-      title: "Corporate Structuring",
-      description: "Optimize your business structure for maximum tax efficiency and operational flexibility.",
+      title: t.services.corporate.title,
+      description: t.services.corporate.description,
       icon: <Building className="h-8 w-8" />,
     },
     {
-      title: "Wealth Management",
-      description: "Personalized strategies for preserving and growing your wealth across generations.",
+      title: t.services.wealth.title,
+      description: t.services.wealth.description,
       icon: <CreditCard className="h-8 w-8" />,
     }
   ];
@@ -68,10 +71,10 @@ const ServicesSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            <span className="text-gradient">Strategic Financial Services</span>
+            <span className="text-gradient">{t.services.title}</span>
           </h2>
           <p className="text-gray-300 max-w-2xl mx-auto">
-            Comprehensive solutions tailored to optimize your international financial position and secure your future prosperity.
+            {t.services.subtitle}
           </p>
         </div>
         

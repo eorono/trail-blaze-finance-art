@@ -1,7 +1,11 @@
+
 import { cn } from "@/lib/utils";
 import Logo from "./Logo";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   return (
     <footer className={cn(
       "pt-20 pb-10 relative z-10",
@@ -14,7 +18,7 @@ const Footer = () => {
               <Logo size="xl" />
             </div>
             <p className="text-gray-400 mb-6">
-              Global financial strategies tailored to optimize your position and secure your future prosperity.
+              {t.footer.description}
             </p>
             <div className="flex space-x-4">
               <a href="#" className="h-10 w-10 rounded-full bg-trailblazery-blue/20 flex items-center justify-center hover:bg-trailblazery-blue/30 transition-colors">
@@ -36,42 +40,48 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-white font-semibold text-lg mb-6">Services</h3>
+            <h3 className="text-white font-semibold text-lg mb-6">{t.footer.services}</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">International Tax</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">Asset Protection</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">Wealth Management</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">Corporate Structuring</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">Compliance Management</a></li>
+              {t.footer.servicesList.map((service, index) => (
+                <li key={index}>
+                  <a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">
+                    {service}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
           
           <div>
-            <h3 className="text-white font-semibold text-lg mb-6">Locations</h3>
+            <h3 className="text-white font-semibold text-lg mb-6">{t.footer.locations}</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">United States</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">Dubai, UAE</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">Cyprus</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">Malta</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">Andorra</a></li>
+              {t.footer.locationsList.map((location, index) => (
+                <li key={index}>
+                  <a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">
+                    {location}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
           
           <div>
-            <h3 className="text-white font-semibold text-lg mb-6">Company</h3>
+            <h3 className="text-white font-semibold text-lg mb-6">{t.footer.company}</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">About Us</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">Our Team</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">Careers</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">Terms of Service</a></li>
+              {t.footer.companyList.map((item, index) => (
+                <li key={index}>
+                  <a href="#" className="text-gray-400 hover:text-trailblazery-magenta transition-colors">
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
         
         <div className="text-center pt-8 border-t border-trailblazery-blue/10">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} Trailblazery. All rights reserved. Designed with Trailblazery branding.
+            © {new Date().getFullYear()} Trailblazery. {t.footer.rights}
           </p>
         </div>
       </div>

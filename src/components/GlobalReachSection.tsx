@@ -1,7 +1,10 @@
 
 import { Card } from "@/components/ui/card";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const GlobalReachSection = () => {
+  const { t } = useLanguage();
+
   const locations = [
     {
       country: "United States",
@@ -40,11 +43,11 @@ const GlobalReachSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            <span className="text-white">Global</span>
-            <span className="text-gradient ml-2">Network</span>
+            <span className="text-white">{t.global.title}</span>
+            <span className="text-gradient ml-2">{t.global.subtitle}</span>
           </h2>
           <p className="text-gray-300 max-w-2xl mx-auto">
-            Strategic presence across key international financial centers, providing comprehensive solutions tailored to your unique needs.
+            {t.global.description}
           </p>
         </div>
         
@@ -93,10 +96,9 @@ const GlobalReachSection = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <h3 className="text-2xl font-semibold mb-4 text-white">Seamlessly Connected Financial Solutions</h3>
+          <h3 className="text-2xl font-semibold mb-4 text-white">{t.global.connected}</h3>
           <p className="text-gray-300 max-w-3xl mx-auto">
-            Our strategic network of international locations allows us to design integrated solutions that optimize your global financial position. 
-            Navigate complex cross-border requirements with confidence and discover opportunities for growth and protection.
+            {t.global.connectedText}
           </p>
         </div>
       </div>

@@ -1,19 +1,22 @@
 
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const HeroSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative min-h-screen flex items-center">
       <div className="container mx-auto px-4 py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-white">Global Financial</span>
-              <span className="block text-gradient">Strategy & Optimization</span>
+              <span className="text-white">{t.hero.title}</span>
+              <span className="block text-gradient">{t.hero.subtitle}</span>
             </h1>
             
             <p className="text-lg text-gray-300 mb-8 max-w-lg">
-              Unlock international tax advantages and secure your financial future with personalized strategies across global jurisdictions.
+              {t.hero.description}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -21,7 +24,7 @@ const HeroSection = () => {
                 className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white px-8 py-6 text-lg"
                 onClick={() => window.open('https://wa.me/34621425745', '_blank')}
               >
-                Schedule Consultation
+                {t.hero.cta}
               </Button>
             </div>
           </div>

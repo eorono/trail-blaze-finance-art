@@ -3,9 +3,12 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import Logo from "./Logo";
+import LanguageSelector from "./LanguageSelector";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,18 +30,29 @@ const Header = () => {
         <Logo size={scrolled ? "md" : "xl"} />
         
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#services" className="text-white hover:text-trailblazery-pink transition-colors">Services</a>
-          <a href="#global" className="text-white hover:text-trailblazery-pink transition-colors">Global Reach</a>
-          <a href="#approach" className="text-white hover:text-trailblazery-pink transition-colors">Our Approach</a>
-          <a href="#contact" className="text-white hover:text-trailblazery-pink transition-colors">Contact</a>
+          <a href="#services" className="text-white hover:text-trailblazery-pink transition-colors">
+            {t.nav.services}
+          </a>
+          <a href="#global" className="text-white hover:text-trailblazery-pink transition-colors">
+            {t.nav.globalReach}
+          </a>
+          <a href="#approach" className="text-white hover:text-trailblazery-pink transition-colors">
+            {t.nav.approach}
+          </a>
+          <a href="#contact" className="text-white hover:text-trailblazery-pink transition-colors">
+            {t.nav.contact}
+          </a>
         </nav>
         
-        <Button 
-          className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white"
-          onClick={() => window.open('https://wa.me/34621425745', '_blank')}
-        >
-          Get Started
-        </Button>
+        <div className="flex items-center gap-4">
+          <LanguageSelector />
+          <Button 
+            className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white"
+            onClick={() => window.open('https://wa.me/34621425745', '_blank')}
+          >
+            {t.header.getStarted}
+          </Button>
+        </div>
       </div>
     </header>
   );
