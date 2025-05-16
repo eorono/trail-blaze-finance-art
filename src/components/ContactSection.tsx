@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Info } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import {
   Dialog,
@@ -10,16 +10,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { toast } from "@/hooks/use-toast";
 
 const ContactSection = () => {
   const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     // Listen for events from the iframe
     const handleMessage = (event: MessageEvent) => {
+      console.log("Message received:", event.data);
+      
       // Check if the message is coming from the form and contains success info
       if (event.data && typeof event.data === 'string') {
         try {
@@ -30,9 +33,18 @@ const ContactSection = () => {
               description: t.contact.formSuccessMessage,
               duration: 5000,
             });
+            // Optional: Close the dialog after successful submission
+            // setIsOpen(false);
           }
         } catch (e) {
-          // Not a JSON message or not from our form
+          // Try to handle non-JSON messages
+          if (event.data.includes('success') || event.data.includes('submitted')) {
+            toast({
+              title: t.contact.formSuccess,
+              description: t.contact.formSuccessMessage,
+              duration: 5000,
+            });
+          }
           console.log("Non-JSON message received:", event.data);
         }
       }
@@ -43,6 +55,21 @@ const ContactSection = () => {
       window.removeEventListener('message', handleMessage);
     };
   }, [t]);
+
+  // Add a function to handle iframe load
+  const handleIframeLoad = () => {
+    console.log("Form iframe loaded");
+    
+    // Try to add a message listener to the iframe content if same origin
+    try {
+      const iframeContent = iframeRef.current?.contentWindow;
+      if (iframeContent) {
+        console.log("Attempting to access iframe content");
+      }
+    } catch (error) {
+      console.log("Cannot access iframe content due to same-origin policy", error);
+    }
+  };
 
   return (
     <section id="contact" className="py-24 relative">
@@ -117,14 +144,12 @@ const ContactSection = () => {
                     </DialogDescription>
                   </DialogHeader>
                   <iframe 
+                    ref={iframeRef}
                     src="https://api.leadconnectorhq.com/widget/form/w9FxJLqrjzzQEG2jtFKW" 
                     className="w-full h-[600px] border-0" 
                     title="Contact Form"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    onLoad={() => {
-                      // Attempt to notify the user when the form loads
-                      console.log("Form iframe loaded");
-                    }}
+                    onLoad={handleIframeLoad}
                   />
                 </DialogContent>
               </Dialog>
