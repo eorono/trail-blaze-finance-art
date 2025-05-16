@@ -138,7 +138,7 @@ const ContactSection = () => {
                     {t.contact.leaveData}
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="w-full max-w-4xl p-0 border-trailblazery-blue/30 bg-trailblazery-dark/90 fixed left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2">
+                <DialogContent className="contact-form-dialog w-full max-w-4xl p-0 border-trailblazery-blue/30 bg-trailblazery-dark/90">
                   <DialogHeader className="px-6 pt-6">
                     <DialogTitle className="text-white">{t.contact.formTitle}</DialogTitle>
                     <DialogDescription className="text-gray-300">

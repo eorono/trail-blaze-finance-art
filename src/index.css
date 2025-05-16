@@ -127,8 +127,16 @@
 
 /* Estilos para mejorar el diálogo modal */
 .fixed-center-dialog {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  position: fixed !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 999 !important;
+  margin: 0 !important;
+}
+
+/* Estilo específico para el diálogo de contacto */
+.contact-form-dialog {
+  max-height: 90vh;
+  overflow-y: auto;
 }
