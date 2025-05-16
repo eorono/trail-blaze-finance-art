@@ -1,15 +1,48 @@
 
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone } from "lucide-react";
+import { MapPin, Phone, Info } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useEffect, useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 const ContactSection = () => {
   const { t } = useLanguage();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    // Listen for events from the iframe
+    const handleMessage = (event: MessageEvent) => {
+      // Check if the message is coming from the form and contains success info
+      if (event.data && typeof event.data === 'string') {
+        try {
+          const data = JSON.parse(event.data);
+          if (data.type === 'form-submit-success' || data.event === 'form-submit-success') {
+            toast({
+              title: t.contact.formSuccess,
+              description: t.contact.formSuccessMessage,
+              duration: 5000,
+            });
+          }
+        } catch (e) {
+          // Not a JSON message or not from our form
+          console.log("Non-JSON message received:", event.data);
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, [t]);
 
   return (
     <section id="contact" className="py-24 relative">
@@ -68,7 +101,7 @@ const ContactSection = () => {
             </div>
             
             <div className="mt-8 pt-8 border-t border-trailblazery-blue/20 text-center">
-              <Dialog>
+              <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogTrigger asChild>
                   <Button 
                     className="bg-gradient-to-r from-trailblazery-blue to-trailblazery-magenta hover:opacity-90 text-white w-full md:w-auto"
@@ -77,11 +110,21 @@ const ContactSection = () => {
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="w-full max-w-4xl p-0 border-trailblazery-blue/30 bg-trailblazery-dark/90">
+                  <DialogHeader className="px-6 pt-6">
+                    <DialogTitle className="text-white">{t.contact.formTitle}</DialogTitle>
+                    <DialogDescription className="text-gray-300">
+                      {t.contact.formDescription}
+                    </DialogDescription>
+                  </DialogHeader>
                   <iframe 
                     src="https://api.leadconnectorhq.com/widget/form/w9FxJLqrjzzQEG2jtFKW" 
                     className="w-full h-[600px] border-0" 
                     title="Contact Form"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    onLoad={() => {
+                      // Attempt to notify the user when the form loads
+                      console.log("Form iframe loaded");
+                    }}
                   />
                 </DialogContent>
               </Dialog>

@@ -93,7 +93,11 @@ export const en = {
     peaceTitle: "Financial Peace of Mind",
     peaceText: "Our team of experts is ready to help you navigate the complex world of international finance.",
     cta: "Schedule Consultation",
-    leaveData: "Leave your details"
+    leaveData: "Leave your details",
+    formTitle: "Contact Form",
+    formDescription: "Please fill out this form and our team will get back to you shortly",
+    formSuccess: "Form Submitted Successfully",
+    formSuccessMessage: "Thank you for your submission. You can now close this window."
   },
   footer: {
     description: "Global financial strategies tailored to optimize your position and secure your future prosperity.",

@@ -93,7 +93,11 @@ export const es = {
     peaceTitle: "Tranquilidad Financiera",
     peaceText: "Nuestro equipo de expertos está listo para ayudarlo a navegar por el complejo mundo de las finanzas internacionales.",
     cta: "Programar Consulta",
-    leaveData: "Deja tus datos"
+    leaveData: "Deja tus datos",
+    formTitle: "Formulario de Contacto",
+    formDescription: "Por favor complete este formulario y nuestro equipo se pondrá en contacto con usted en breve",
+    formSuccess: "Formulario Enviado Correctamente",
+    formSuccessMessage: "Gracias por su envío. Ahora puede cerrar esta ventana."
   },
   footer: {
     description: "Estrategias financieras globales diseñadas para optimizar su posición y asegurar su futura prosperidad.",
