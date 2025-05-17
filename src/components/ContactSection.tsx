@@ -34,64 +34,46 @@ const ContactSection = () => {
     // Listen for events from the iframe
     const handleMessage = (event: MessageEvent) => {
       console.log("Message received:", event.data);
-      
-      // Check if the message is coming from the form and contains success info
+
+      let isSuccessSignal = false;
+
       if (event.data && typeof event.data === 'string') {
         try {
           const data = JSON.parse(event.data);
-          if (data.type === 'form-submit-success' || data.event === 'form-submit-success') {
-            // Show success message
-            setShowSuccess(true);
-            
-            toast({
-              title: t.contact.formSuccess,
-              description: t.contact.formSuccessMessage,
-              duration: 5000,
-            });
-            
-            // Close the dialog after a short delay to show the success message
-            setTimeout(() => {
-              setIsOpen(false);
-            }, 2000);
-          }
-          // Also handle button clicks or page changes in iframe
-          if (data.type === 'button-click' || data.event === 'button-click' || 
-              data.type === 'page-change' || data.event === 'page-change' || 
-              data.type === 'form-submitted' || data.event === 'form-submitted') {
-            // Show success message
-            setShowSuccess(true);
-            
-            // Close the dialog after a short delay
-            setTimeout(() => {
-              setIsOpen(false);
-            }, 2000);
+          // Check for specific success message from injected script or iframe
+          if (data.type === 'submit' || data.event === 'submit') {
+            isSuccessSignal = true;
           }
         } catch (e) {
-          // Try to handle non-JSON messages
-          if (event.data.includes('success') || 
-              event.data.includes('submitted') || 
-              event.data.includes('button') || 
-              event.data.includes('click') || 
-              event.data.includes('complete') || 
-              event.data.includes('change') ||
-              event.data.includes('thank you')) {
-            
-            // Show success message
-            setShowSuccess(true);
-            
-            toast({
-              title: t.contact.formSuccess,
-              description: t.contact.formSuccessMessage,
-              duration: 5000,
-            });
-            
-            // Close the dialog after a short delay
-            setTimeout(() => {
-              setIsOpen(false);
-            }, 2000);
+          // Handle non-JSON string messages that indicate success
+          // These might come from simpler postMessage implementations or if the iframe redirects
+          // to a page whose URL is sent as a message, and that URL implies success.
+          // Or, if the iframe sends simple strings like "success".
+          if (typeof event.data === 'string' &&
+              (event.data.toLowerCase().includes('success') ||
+               event.data.toLowerCase().includes('thank you') ||
+               event.data.toLowerCase().includes('gracias') ||
+               event.data.toLowerCase().includes('complete') ||
+               // "submitted" can be ambiguous, but if it's the only signal from a simple iframe,
+               // it might be necessary. However, for leadconnector, 'form-submit-success' is better.
+               // Let's be cautious with 'submitted' alone from a raw string.
+               event.data.toLowerCase().includes('form-submit-success'))) { // Check for the type string itself
+            isSuccessSignal = true;
           }
           console.log("Non-JSON message received:", event.data);
         }
+      }
+
+      if (isSuccessSignal) {
+        setShowSuccess(true);
+        toast({
+          title: t.contact.formSuccess,
+          description: t.contact.formSuccessMessage,
+          duration: 5000,
+        });
+        setTimeout(() => {
+          setIsOpen(false);
+        }, 2000); // Close dialog after 2 seconds
       }
     };
 

@@ -18,7 +18,7 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center">
       <div className="container mx-auto px-4 py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="animate-on-scroll fade-in-left">
+          <div className="animate-on-scroll fade-in-left text-left">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               <span className="text-white">{t.hero.title}</span>
               <span className="block text-gradient">{t.hero.subtitle}</span>
